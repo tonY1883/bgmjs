@@ -1,0 +1,47 @@
+#bgm-player {
+    --prim-color: #e4e4e4;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: var(--prim-color);
+    font-size: 1rem;
+    position: fixed;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    font-family: 'Open Sans', 'Noto Sans', sans-serif;
+}
+
+#bgm-player progress {
+    display: none;
+    appearance: none;
+    background-color: transparent;
+    color: var(--prim-color);
+    height: 0.9rem;
+    border: solid 2px;
+    margin-left: 0.15rem;
+}
+
+#bgm-player progress::-webkit-progress-bar {
+    background-color: transparent;
+}
+
+#bgm-player progress::-moz-progress-bar {
+    background-color: var(--prim-color);
+}
+
+#bgm-player progress::-webkit-progress-value {
+    background-color: var(--prim-color);
+}
+
+#bgm-player .material-symbols-sharp {
+    font-size: 1.1rem;
+    line-height: unset;
+}
+
+#bgm-track-name-display::before {
+    content: '「';
+}
+
+#bgm-track-name-display::after {
+    content: '」';
+}

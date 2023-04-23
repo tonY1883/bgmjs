@@ -222,7 +222,7 @@ class BGMPlayer {
 
 	loadStyling(): void {
 		const link: HTMLLinkElement = document.createElement("link");
-		link.href = "bgm.css";
+		link.href = "https://raw.githubusercontent.com/tonY1883/bgmjs/github-release/bgm.css";
 		link.type = "text/css";
 		link.rel = "stylesheet";
 		link.media = "screen,print";

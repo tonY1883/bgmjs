@@ -11,13 +11,13 @@ First, upload the music files you want to play on your http server.
 Next, an index file needs to be prepared for *BGMJS* to know what tracks to play.
 
 The index should be a `JSON` array with each trach represented in the following syntax:
-```json
+```
 {
-        "index": 1,//unique id of the track
+        "index": 1,               //unique id of the track
         "src": "lorem_ipsum.flac",//path to the audio file
-        "name": "Lorem ipsum",//Name to be displayed on the player
-        "artist": "John Doe",//track artist. This is to be diplayed on the browser media player.
-        "album": "Lorem Ipsum" //track album. This is to be diplayed on the browser media player.
+        "name": "Lorem ipsum",    //Name to be displayed on the player
+        "artist": "John Doe",     //track artist. This is to be diplayed on the browser media player.
+        "album": "Lorem Ipsum"    //track album. This is to be diplayed on the browser media player.
 },
 ```
 
@@ -27,7 +27,7 @@ Or, if you have th access to the server where the files are placed, the index ca
 
 Include *BGMJS* in yout web page HTML:
 ```html
-<script src="https://raw.githubusercontent.com/tonY1883/bgmjs/master/bgm.js"></script>
+<script src="https://raw.githubusercontent.com/tonY1883/bgmjs/github-release/bgm.js"></script>
 ```
 Then initialize the player during page load, passing path of the generated index file:
 

@@ -27,7 +27,7 @@ Or, if you have th access to the server where the files are placed, the index ca
 
 Include *BGMJS* in yout web page HTML:
 ```html
-<script src="https://raw.githubusercontent.com/tonY1883/bgmjs/github-release/bgm.js"></script>
+<script src="https://tony1883.github.io/bgmjs/bgm.js"></script>
 ```
 Then initialize the player during page load, passing path of the generated index file:
 

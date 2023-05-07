@@ -55,6 +55,9 @@ interface BGMConfig {
 ```
 
 ## Controls
+
+![UI preview](readme/demo.png)
+
 *BGMJS* provides basic playback controls. The design is to be minimalist, so the controls may be a bit unintuitive.
 
 1. Click on the music note to mute/unmute the playback.

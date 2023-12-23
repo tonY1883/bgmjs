@@ -15,26 +15,26 @@ interface BGMConfig {
 	volumeSteps?:number;
 }
 class BGMPlayer {
-	DEFAULT_VOLUME_LEVEL = 0.5;
-	VOLUME_CONTROL_STEPS = 35;
+	protected DEFAULT_VOLUME_LEVEL = 0.5;
+	protected VOLUME_CONTROL_STEPS = 35;
 
-	tracklistSource: string;
+	protected tracklistSource: string;
 
-	currentTrack: HTMLAudioElement;
-	trackList: Array<BGMTrack>;
+	protected currentTrack: HTMLAudioElement;
+	protected trackList: Array<BGMTrack>;
 
-	trackNameDisplay: HTMLSpanElement;
-	muteControl: HTMLSpanElement;
+	protected trackNameDisplay: HTMLSpanElement;
+	protected muteControl: HTMLSpanElement;
 
-	volumeControl: HTMLProgressElement;
-	volumeControlSteps: number;
-	volumeControlFaderHandle: number;
+	protected volumeControl: HTMLProgressElement;
+	protected volumeControlSteps: number;
+	protected volumeControlFaderHandle: number;
 
-	volumeLevel = this.DEFAULT_VOLUME_LEVEL;
-	muted: boolean = true;
-	autoplay: boolean;
+	protected volumeLevel = this.DEFAULT_VOLUME_LEVEL;
+	protected muted: boolean = true;
+	protected autoplay: boolean;
 
-	uiColor: string;
+	protected uiColor: string;
 
 	constructor(config: BGMConfig) {
 		this.tracklistSource = config.indexPath;
@@ -45,7 +45,7 @@ class BGMPlayer {
 
 	}
 
-	loadTrackList(callBack: (player: BGMPlayer) => void): void {
+	protected loadTrackList(callBack: (player: BGMPlayer) => void): void {
 		console.info('Loading track list');
 		fetch(this.tracklistSource, { cache: 'no-store' })
 			.then(response => response.json())
@@ -58,7 +58,7 @@ class BGMPlayer {
 			});
 	}
 
-	setTrack(index: number): void {
+	public setTrack(index: number): void {
 		let track = this.trackList.find(t => t.index === index);
 		if (!!track) {
 			//unset the current track first
@@ -79,7 +79,7 @@ class BGMPlayer {
 		}
 	}
 
-	loadTrack(path: string, onLoad: (this: GlobalEventHandlers, ev: Event) => any): void {
+	protected loadTrack(path: string, onLoad: (this: GlobalEventHandlers, ev: Event) => any): void {
 		console.info('Loading track: ', path);
 		this.currentTrack = new Audio(path);
 		this.currentTrack.oncanplay = onLoad;
@@ -96,7 +96,7 @@ class BGMPlayer {
 		this.currentTrack.load();
 	}
 
-	playTrack(): void {
+	protected playTrack(): void {
 		if (this.currentTrack) {
 			if (this.currentTrack.paused) {
 				this.currentTrack.volume = this.volumeLevel;
@@ -131,7 +131,7 @@ class BGMPlayer {
 		}
 	}
 
-	stopTrack(): void {
+	protected stopTrack(): void {
 		if (!!this.currentTrack) {
 			this.currentTrack.pause();
 			if (navigator.mediaSession) {
@@ -141,7 +141,7 @@ class BGMPlayer {
 		}
 	}
 
-	toggleMute(state?: boolean): void {
+	public toggleMute(state?: boolean): void {
 		if (state !== undefined) {
 			this.muted = state;
 		} else {
@@ -166,11 +166,11 @@ class BGMPlayer {
 		this.updateVolumeControlDisplay();
 	}
 
-	updateMuteDisplay(): void {
+	protected updateMuteDisplay(): void {
 		this.muteControl.innerHTML = this.muted ? 'music_off' : 'music_note'
 	}
 
-	showVolumeControl(): void {
+	protected showVolumeControl(): void {
 		if (!this.muted) {
 			this.updateVolumeControlDisplay();
 			this.trackNameDisplay.style.display = 'none';
@@ -185,12 +185,12 @@ class BGMPlayer {
 		}
 	}
 
-	hideVolumeControl(): void {
+	protected hideVolumeControl(): void {
 		this.volumeControl.style.display = 'none';
 		this.trackNameDisplay.style.display = 'initial';
 	}
 
-	changeVolume(increase: boolean): void {
+	public changeVolume(increase: boolean): void {
 		let change = 100 / this.volumeControlSteps / 100;
 		if (!increase) {
 			change = 0 - change;
@@ -203,24 +203,24 @@ class BGMPlayer {
 		this.updateVolumeControlDisplay();
 	}
 
-	updateVolumeControlDisplay(): void {
+	protected updateVolumeControlDisplay(): void {
 		this.volumeControl.value = this.volumeLevel * 100;
 	}
 
-	randomSetTrack(): void {
+	protected randomSetTrack(): void {
 		this.setTrack(this.trackList[Math.floor(Math.random() * this.trackList.length)].index)
 	}
 
-	handleLoadTrackError(): void {
+	protected handleLoadTrackError(): void {
 		this.randomSetTrack();
 	}
 
-	handleFatalError(): void {
+	protected handleFatalError(): void {
 		this.toggleMute(true)
 		this.trackNameDisplay.style.display = 'none';
 	}
 
-	loadStyling(): void {
+	protected loadStyling(): void {
 		const link: HTMLLinkElement = document.createElement("link");
 		link.href = "bgm.css";
 		link.type = "text/css";
@@ -235,7 +235,7 @@ class BGMPlayer {
 		document.head.appendChild(gFontlink);
 	}
 
-	initialize(): void {
+	protected initialize(): void {
 		const element: HTMLDivElement = document.createElement('div');
 		element.id = "bgm-player"
 		element.innerHTML = '<span id="bgm-indicator" class="material-symbols-sharp">music_note</span><span id="bgm-track-name-display"></span><progress id="bgm-volume-control" max="100" min="0"></progress>'

@@ -25,7 +25,7 @@ Or, if you have th access to the server where the files are placed, the index ca
 
 ### Setting up the web page
 
-Include *BGMJS* in yout web page HTML:
+Include *BGMJS* in your web page's HTML:
 ```html
 <script src="https://tony1883.github.io/bgmjs/bgm.js"></script>
 ```
